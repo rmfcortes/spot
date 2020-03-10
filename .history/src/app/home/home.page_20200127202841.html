@@ -1,0 +1,67 @@
+<ion-content>
+    <div style="height: 100%; width: 100%">
+        <div class="profile" lines="none">
+            <div style="position: absolute; margin-top: 0.75rem;">
+                <ion-menu-button color="light"></ion-menu-button>
+            </div>
+        </div>
+        <ion-item lines="none" class="cuadro-opciones">
+            <ion-input type="text" placeholder="Buscar productos y servicios"></ion-input>
+            <ion-icon slot="end" name="search"></ion-icon>
+        </ion-item>
+
+        <ion-slides [options]="slideOpts">
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[0]">
+                </preload-image>
+            </ion-slide>
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[1]">
+                </preload-image>
+            </ion-slide>
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[2]">
+                </preload-image>
+            </ion-slide>
+        </ion-slides>
+
+        <ion-grid class="ion-no-padding">
+            <ion-row>
+                <ion-col size="6">
+                    <img src="../../assets/img/categorias/restaurantes.png" alt="">
+                </ion-col>
+                <ion-col size="6">
+                    <img src="../../assets/img/categorias/basicos.png" alt="">
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/abarrotes.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/salud.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/belleza.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/tecnologia.png" alt="">
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/viajes.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/automotriz.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/moda.png" alt="">
+                </ion-col>
+                <ion-col size="3">
+                    <img src="../../assets/img/categorias/ferreteria.png" alt="">
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div>
+</ion-content>

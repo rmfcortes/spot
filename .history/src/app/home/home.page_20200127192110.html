@@ -1,0 +1,25 @@
+<ion-content>
+    <div style="height: 100%; width: 100%">
+        <div class="profile" lines="none">
+            <div style="position: absolute; margin-top: 0.75rem;">
+                <ion-menu-button color="light"></ion-menu-button>
+            </div>
+        </div>
+        <ion-item lines="none" class="cuadro-opciones">
+            <ion-input type="text" placeholder="Buscar productos y servicios"></ion-input>
+            <ion-icon slot="end" name="search"></ion-icon>
+        </ion-item>
+
+        <ion-slides style="margin-top: 2rem;" [options]="slideOpts">
+            <ion-slide>
+                <img src="https://img-cdn.hipertextual.com/files/2019/12/hipertextual-ofertas-software-nuevo-ano-windows-10-pro-909-euros-office-2019-4549-euros-2019445220.jpg?strip=all&lossy=1&quality=55&resize=728%2C360&ssl=1" alt="">
+            </ion-slide>
+            <ion-slide>
+                <img src="https://www.journaldugeek.com/content/uploads/2019/06/190417-728-360-1280x720.jpg" alt="">
+            </ion-slide>
+            <ion-slide>
+                <img src="https://www.dolce-gusto.com.mx/media/wysiwyg/Banner_AlwaysON_split_dic.jpg" alt="">
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>

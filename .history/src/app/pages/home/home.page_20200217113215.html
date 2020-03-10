@@ -1,0 +1,85 @@
+<ion-content>
+    <div class="profile">
+        <ng-container *ngIf="uid; else menuTemplate">
+            <ion-buttons slot="start">
+                <ion-menu-button color="light"></ion-menu-button>
+            </ion-buttons>
+        </ng-container>
+        <ng-template #menuTemplate>
+            <ion-buttons slot="start">
+                <ion-button (click)="login()">
+                    Iniciar sesión
+                    <ion-icon slot="start" name="log-in"></ion-icon>
+                </ion-button>
+            </ion-buttons>
+        </ng-template>
+    </div>
+    <div class="cuadro-opciones">
+        <ion-item style="text-align: center;">
+            <ion-input [(ngModel)]="busqueda" type="text" placeholder="Busca servicios o productos"></ion-input>
+            <ng-container *ngIf="matchFound; else iconBusquedaTemplate">
+                <ion-icon slot="end" name="close" color="primary" (click)="resetBusqueda()"></ion-icon>
+            </ng-container>
+            <ng-template #iconBusquedaTemplate>
+                <ion-icon slot="end" name="search" color="primary" (click)="buscar()"></ion-icon>
+            </ng-template>
+        </ion-item>
+    </div>
+
+    <h1 style="margin-left: 1rem;" *ngIf="matchFound">Resultados búsqueda</h1>
+    <ion-list *ngIf="matchFound">
+        <ion-card *ngFor="let item of negociosBusqueda">
+            <ion-item>
+                <ion-thumbnail>
+                    <img [src]="item.foto" />
+                </ion-thumbnail>
+                <ion-label style="margin-left: 0.5rem;">
+                    <h2>{{item.nombre}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-card>
+    </ion-list>
+
+    <h1 style="margin-left: 1rem;" *ngIf="pedidos.length > 0">Pedidos</h1>
+    <ion-list *ngIf="pedidos.length > 0" class="boton-margen">
+        <ng-container *ngIf="verPedidos; else pedidosTemplate">
+            <ion-button (click)="verPedidos = false" expand="block" fill="outline" shape="round">
+                Ocultar
+                <ion-icon name="arrow-up" mode="ios"></ion-icon>
+            </ion-button>
+        </ng-container>
+        <ng-template #pedidosTemplate>
+            <ion-button (click)="verPedidos = true" expand="block" fill="outline" shape="round">
+                <ion-badge color="primary" style="margin-right: 1.5rem;">{{pedidos.length}}</ion-badge>
+                Ver pedidos en curso
+                <ion-icon name="arrow-down" mode="ios"></ion-icon>
+            </ion-button>
+        </ng-template>
+
+        <div *ngIf="verPedidos">
+            <ion-item *ngFor="let item of pedidos" detail [routerLink]="'/mapa/' + item.id">
+                <ion-label color="medium">{{item.negocio.nombreNegocio}}</ion-label>
+                <ion-badge color="primary" *ngIf="item.unRead > 0">{{item.unRead}}</ion-badge>
+            </ion-item>
+        </div>
+    </ion-list>
+
+    <h1 style="margin-left: 1rem;" *ngIf="ofertas.length > 0">Promociones</h1>
+    <ion-slides [options]="slideOpts" *ngIf="ofertas.length > 0">
+        <ion-slide *ngFor="let item of ofertas" (click)="irAOferta(item)">
+            <preload-image [ratio]="{w: 1, h: .65}" [src]="item.foto">
+            </preload-image>
+        </ion-slide>
+        <ion-slide *ngIf="hayMas" (click)="verOfertas()">
+            <preload-image [ratio]="{w: 1, h: .65}" src="../../../assets/img/botones/verTodas.png">
+            </preload-image>
+        </ion-slide>
+    </ion-slides>
+
+    <h1 style="margin-left: 1rem;">Categorías</h1>
+    <ion-slides [options]="sld" style="margin-bottom: 2rem;">
+        <ion-slide *ngFor="let item of categorias; let i = index" (click)="irACategoria(item.categoria)">
+            <ion-img [src]="item.foto"></ion-img>
+        </ion-slide>
+    </ion-slides>
+</ion-content>

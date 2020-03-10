@@ -1,0 +1,32 @@
+.topleft {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    font-size: 18pt;
+}
+
+.boton-add {
+    --box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+}
+
+.card {
+    // border: lightgray solid 0.25px;
+    width: 28vw;
+    max-width: 28vw;
+    display: inline-block;
+    text-align: center;
+    padding: .75rem;
+    margin: 0;
+    font-size: 14pt;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+    border: 1px solid gold;
+}
+
+.product-name {
+    height: 75px;
+    overflow: hidden;
+    text-overflow: ellipsis !important;
+    white-space: nowrap;
+}

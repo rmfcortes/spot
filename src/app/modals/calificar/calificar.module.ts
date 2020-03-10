@@ -1,0 +1,21 @@
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { StarRatingModule } from 'ionic4-star-rating';
+
+import { CalificarPage } from './calificar.page';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    StarRatingModule,
+  ],
+  declarations: [CalificarPage],
+  entryComponents: [CalificarPage]
+})
+export class CalificarPageModule {}

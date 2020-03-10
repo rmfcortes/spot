@@ -1,0 +1,39 @@
+$white: #FFFFFF;
+$preload-image-bg: #f3f3f2;
+$spinner-color: #a09f9f;
+$spinner-size: 15px;
+preload-image {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin: auto;
+    background-color: $preload-image-bg;
+    overflow: hidden;
+    .pre {
+        margin: auto;
+        font-size: $spinner-size;
+        color: $spinner-color;
+    }
+    ion-img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: visibility 0s linear, opacity .5s linear;
+        opacity: 0;
+        visibility: hidden;
+        width: 100% !important;
+        height: 100%;
+    }
+    &.img-loaded {
+        background-color: transparent;
+        border: 0;
+        ion-img {
+            opacity: 1;
+            visibility: visible;
+        }
+        .pre {
+            display: none;
+            visibility: hidden;
+        }
+    }
+}

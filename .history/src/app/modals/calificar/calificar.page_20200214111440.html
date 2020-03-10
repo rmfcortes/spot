@@ -1,0 +1,17 @@
+<ion-header no-border>
+    <ion-buttons slot="end">
+        <ion-button (click)="regresar()">
+            <ion-icon slot="start" name="close"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-item style="text-align: center;">
+            <ion-thumbnail>
+                <img [src]="pedido.negocio.logo" />
+            </ion-thumbnail>
+        </ion-item>
+    </ion-card>
+</ion-content>

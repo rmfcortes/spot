@@ -1,0 +1,70 @@
+<ion-content>
+    <div>
+        <div class="back-icon">
+            <ion-icon *ngIf="loginWithEmail" name="arrow-back" (click)="regresarEmail()"></ion-icon>
+            <ion-icon *ngIf="creaCuenta" name="arrow-back" (click)="regresarCuenta()"></ion-icon>
+        </div>
+        <div>
+            <div style="text-align: center;">
+                <span *ngIf="!creaCuenta" class="text-Lobster">Mercapp</span>
+            </div>
+
+            <div class="botones" *ngIf="!loginWithEmail && !creaCuenta">
+                <ion-button (click)="loginFace()" class="btn-face" shape="round" expand="block">
+                    <ion-icon class="mr-5" name="logo-facebook"></ion-icon>
+                    Continuar con Facebook
+                </ion-button>
+                <img style="margin-bottom: 1rem;" src="../../../assets/img/backgrounds/o.jpg" alt="">
+                <ion-input type="text" class="input-usuario" placeholder="Correo electrónico"></ion-input>
+                <ion-input type="text" class="input-usuario" placeholder="Contraseña"></ion-input>
+                <ion-label color="primary" style="float: right;">Olvidaste tu contraseña</ion-label>
+                <ion-button (click)="loginEmail()" style="margin-top: 1.2rem" color="primary" shape="round" expand="block">
+                    <ion-icon class="mr-5" name="mail"></ion-icon>
+                    Iniciar sesión
+                </ion-button>
+            </div>
+
+            <div *ngIf="loginWithEmail">
+                <form #forma="ngForm" (submit)="ingresarConCorreo()">
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Correo</ion-label>
+                        <ion-input [(ngModel)]="correo" type="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Contraseña</ion-label>
+                        <ion-input type="password" required [(ngModel)]="pass" name="telefono" minlength="5"></ion-input>
+                    </ion-item>
+                    <ion-button style="margin-top: 2rem" [disabled]="!forma.valid" expand="block" shape="round" type="submit">
+                        Ingresar
+                    </ion-button>
+                </form>
+                <ion-label (click)="crearCuentaEmail()" style="margin-top: 1rem; float: right" color="medium">Crear una cuenta.</ion-label>
+            </div>
+
+            <div *ngIf="creaCuenta">
+                <form #formaCuenta="ngForm" (submit)="generarCuenta()">
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Nombre</ion-label>
+                        <ion-input [(ngModel)]="usuario.nombre" type="text" name="nombre" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Correo</ion-label>
+                        <ion-input [(ngModel)]="usuario.correo" type="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Contraseña (mínimo 5 caracteres)</ion-label>
+                        <ion-input type="password" required [(ngModel)]="usuario.pass" name="pass" minlength="5"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label color="medium" position="floating">Confirma contraseña</ion-label>
+                        <ion-input type="password" required [(ngModel)]="usuario.passConfirm" name="passConfirm" minlength="5"></ion-input>
+                    </ion-item>
+                    <ion-button style="margin-top: 2rem" [disabled]="!formaCuenta.valid" expand="block" shape="round" type="submit">
+                        Crear cuenta
+                    </ion-button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</ion-content>

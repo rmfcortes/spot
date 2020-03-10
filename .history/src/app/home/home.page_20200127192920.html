@@ -1,0 +1,28 @@
+<ion-content>
+    <div style="height: 100%; width: 100%">
+        <div class="profile" lines="none">
+            <div style="position: absolute; margin-top: 0.75rem;">
+                <ion-menu-button color="light"></ion-menu-button>
+            </div>
+        </div>
+        <ion-item lines="none" class="cuadro-opciones">
+            <ion-input type="text" placeholder="Buscar productos y servicios"></ion-input>
+            <ion-icon slot="end" name="search"></ion-icon>
+        </ion-item>
+
+        <ion-slides style="margin-top: 1rem;" [options]="slideOpts">
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[0]">
+                </preload-image>
+            </ion-slide>
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[1]">
+                </preload-image>
+            </ion-slide>
+            <ion-slide>
+                <preload-image [ratio]="{w: 1, h: 1}" [src]="ofertas[2]">
+                </preload-image>
+            </ion-slide>
+        </ion-slides>
+    </div>
+</ion-content>

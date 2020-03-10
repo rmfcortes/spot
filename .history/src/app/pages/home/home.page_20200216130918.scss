@@ -1,0 +1,38 @@
+.bg-class {
+    --background: linear-gradient(197deg, rgb(248, 162, 3) 0%, rgb(235, 109, 6) 13.5%, rgb(246, 142, 6) 33.33%, rgb(250, 82, 3) 100%) !important;
+    color: white;
+}
+
+.profile {
+    margin-top: 0vh;
+    height: 4rem;
+    --background: linear-gradient(197deg, rgb(248, 162, 3) 0%, rgb(235, 109, 6) 13.5%, rgb(246, 142, 6) 33.33%, rgb(250, 82, 3) 100%) !important;
+    background: linear-gradient(197deg, rgb(248, 162, 3) 0%, rgb(235, 109, 6) 13.5%, rgb(246, 142, 6) 33.33%, rgb(250, 82, 3) 100%) !important;
+}
+
+.cuadro-opciones {
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: -1rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.15), 0 6px 20px 0 rgba(0, 0, 0, 0.10);
+    z-index: 20;
+}
+
+img {
+    padding: 0.15rem;
+}
+
+ion-slide.swiper-slide {
+    left: 10%;
+}
+
+.activo {
+    height: 25rem !important;
+    margin: auto;
+}
+
+.inactivo {
+    height: 20rem !important;
+    margin: auto;
+}

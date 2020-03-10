@@ -1,0 +1,27 @@
+<ion-header no-border>
+    <ion-toolbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="regresar()" color="primary">
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-item lines="none">
+            <ion-thumbnail class="foto">
+                <img [src]="pedido.negocio.logo" />
+            </ion-thumbnail>
+        </ion-item>
+        <ion-item style="text-align: center;" lines="none">
+            <ion-label>{{pedido.negocio.nombreNegocio}}</ion-label>
+        </ion-item>
+        <star-rating value="5" totalstars="5" checkedcolor="gold" uncheckedcolor="grey" size="24px" readonly="false"></star-rating>
+        <ion-item lines="none" style="margin-bottom: 1.5rem">
+            <ion-label color="medium" position="floating">Comentarios</ion-label>
+            <ion-textarea style="border-bottom: solid 1px var(--ion-color-primary);" (keyup.enter)="$event.target.blur();" [(ngModel)]="calificacion.comentarios" name="descripcion"></ion-textarea>
+        </ion-item>
+    </ion-card>
+</ion-content>

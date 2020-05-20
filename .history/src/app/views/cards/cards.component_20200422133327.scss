@@ -1,0 +1,19 @@
+.triangle-topleft {
+    width: 0;
+    height: 0;
+    border-top: 150px solid var(--ion-color-primary);
+    border-right: 150px solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+}
+
+.badge {
+    position: absolute;
+    color: white;
+    font-size: large;
+    z-index: 25;
+    top: 15px;
+    left: 15px;
+}

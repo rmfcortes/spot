@@ -1,0 +1,42 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="regresar()">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Tarjeta de crédito/débito</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #forma (ngSubmit)="agregarTarjeta()">
+        <ion-item>
+            <ion-label position="floating">Número de tarjeta
+                <ion-input [(ngModel)]="tarjeta.numero" placeholder="0000 0000 0000 0000" required name="email" type="number" maxlength="19" minlength="19"></ion-input>
+        </ion-item>
+        <ion-grid>
+            <ion-row>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">Vigencia
+                            <ion-input [(ngModel)]="tarjeta.expiracion" placeholder="MM/AA" required name="vigencia" type="text" maxlength="5" minlength="5"></ion-input>
+                    </ion-item>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-item>
+                        <ion-label position="floating">Código de seguridad
+                            <ion-input [(ngModel)]="tarjeta.cvv" placeholder="CVV" required name="cvv" type="number" maxlength="3" minlength="3"></ion-input>
+                    </ion-item>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-item>
+            <ion-label position="floating">Nombre del titular
+                <ion-input [(ngModel)]="tarjeta.nombre" placeholder="nombre" required name="nombre" type="text"></ion-input>
+        </ion-item>
+        <ion-button color="primary" type="submit" [disabled]="loginForm.invalid" expand="block" class="margen-boton">
+            Guardar
+        </ion-button>
+    </form>
+</ion-content>

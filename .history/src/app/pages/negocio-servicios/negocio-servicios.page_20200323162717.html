@@ -1,0 +1,147 @@
+<ng-container *ngIf="!error; else errorTemplate">
+    <ng-container *ngIf="infoReady; else infoTemplate">
+        <ion-header *ngIf="portada">
+            <ion-toolbar [appScrollVanish]="scrollArea">
+                <ion-icon color="light" class="topleft" (click)="regresar()" name="arrow-back"></ion-icon>
+                <img style="width: 100%;" [src]="portada" alt="">
+            </ion-toolbar>
+            <ion-toolbar [appTitleScrollVanish]="scrollArea">
+                <ion-title color="primary" class="comfortaa">{{negocio.nombre}}</ion-title>
+                <ion-buttons slot="end">
+                    <ion-button fill="clear" (click)="verInfo()">
+                        Ver más
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+            <ion-segment scrollable>
+                <ion-segment-button (click)="resetProds()">
+                    Todos
+                </ion-segment-button>
+                <ion-segment-button (click)="resetProds('Ofertas')" *ngIf="hasOfertas">
+                    Ofertas
+                </ion-segment-button>
+                <ion-segment-button (click)="resetProds(item.nombre)" *ngFor="let item of pasillos.pasillos" class="ion-text-wrap">
+                    {{item.nombre}}
+                </ion-segment-button>
+            </ion-segment>
+        </ion-header>
+
+        <ion-content #scrollArea scrollEvents="true" class="ion-padding">
+            <ng-container *ngIf="cargandoProds; else cargandoTemp">
+                <ion-item lines="none">
+                    <ion-spinner style="margin: auto;" name="dots" color="primary"></ion-spinner>
+                </ion-item>
+            </ng-container>
+            <ng-template #cargandoTemp>
+                <div *ngIf="servicios.length > 0" style="margin-bottom: 135px;">
+                    <ion-list *ngFor="let item of servicios; let i = index">
+                        <ion-list-header style="--color: var(--ion-color-primary);">
+                            <ion-label class="comfortaa">{{item.nombre | titlecase}}</ion-label>
+                        </ion-list-header>
+                        <ng-container *ngIf="vista === 'lista'; else vistaTemp">
+                            <ion-card>
+                                <ion-item *ngFor="let serv of item.servicios; let y = index" (click)="verServicio(serv)" style="--padding-start: 0" detail>
+                                    <ion-item lines="none">
+                                        <ion-label class="ion-text-wrap">{{serv.nombre}}</ion-label>
+                                    </ion-item>
+                                </ion-item>
+                            </ion-card>
+                        </ng-container>
+                        <ng-template #vistaTemp>
+                            <ion-card *ngFor="let serv of item.servicios; let y = index" style="margin-bottom: 1rem;">
+                                <preload-image [ratio]="{w: 1, h: 0.75}" [src]="serv.url"></preload-image>
+                                <ion-card-header>
+                                    <ion-card-title>
+                                        <ion-item lines="none">
+                                            <ion-label color="primary">
+                                                <h1 class="comfortaa">{{serv.nombre}}</h1>
+                                            </ion-label>
+                                            <ion-button (click)="verServicio(serv)" fill="clear" slot="end"> Ver más
+                                            </ion-button>
+                                        </ion-item>
+                                    </ion-card-title>
+                                </ion-card-header>
+                                <ion-card-content class="descripcion">
+                                    {{serv.descripcion}}
+                                </ion-card-content>
+                            </ion-card>
+                        </ng-template>
+                    </ion-list>
+                </div>
+                <ion-item lines="none" style="text-align: center;">
+                    <ion-label color="medium">No hay más resultados</ion-label>
+                </ion-item>
+            </ng-template>
+
+
+            <ng-container *ngIf="pasilloFiltro; else elseTemplate">
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadDataListaFiltrada($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </ng-container>
+            <ng-template #elseTemplate>
+                <ion-infinite-scroll threshold="100px" (ionInfinite)="loadDataLista($event)">
+                    <ion-infinite-scroll-content loadingSpinner="bubbles">
+                    </ion-infinite-scroll-content>
+                </ion-infinite-scroll>
+            </ng-template>
+        </ion-content>
+
+        <app-no-network></app-no-network>
+
+        <ion-footer>
+            <ion-toolbar color="light" style="text-align:center;">
+                <ng-container *ngIf="negocio.abierto; else footTemplate">
+                    <ion-grid fixed class="ion-no-padding">
+                        <ion-row>
+                            <ion-col size="4">
+                                <ion-button shape="round" (click)="llamar()">
+                                    <ion-icon slot="icon-only" name="call"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-button shape="round" (click)="contactViaWhatsApp()">
+                                    <ion-icon slot="icon-only" name="logo-whatsapp"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                            <ion-col size="4">
+                                <ion-button shape="round" (click)="verInfo()">
+                                    <ion-icon slot="icon-only" name="location"></ion-icon>
+                                </ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ng-container>
+                <ng-template #footTemplate>
+                    <ion-button class="boton-margen" expand="block" color="danger" fill="clear">
+                        Negocio cerrado
+                    </ion-button>
+                    <ion-button class="boton-margen" expand="block" color="danger" (click)="verInfo()">
+                        Ver horario
+                    </ion-button>
+                </ng-template>
+            </ion-toolbar>
+        </ion-footer>
+    </ng-container>
+    <ng-template #infoTemplate>
+        <ion-spinner class="spinner" name="dots"></ion-spinner>
+    </ng-template>
+</ng-container>
+<ng-template #errorTemplate>
+    <ion-content>
+    </ion-content>
+    <ion-footer>
+        <ion-item class="boton-margen" lines="none" style="text-align: center; margin-top: 3rem;">
+            <ion-label>
+                <h2 class="ion-text-wrap">Lo sentimos, surgió un problema al cargar la información de este negocio.</h2>
+            </ion-label>
+        </ion-item>
+        <ion-button class="boton-margen" (click)="reintentar()" expand="block" shape="round">
+            Intenar de nuevo
+        </ion-button>
+        <ion-button (click)="regresar()" expand="block" fill="clear" shape="round">
+            Regresar
+        </ion-button>
+    </ion-footer>
+</ng-template>

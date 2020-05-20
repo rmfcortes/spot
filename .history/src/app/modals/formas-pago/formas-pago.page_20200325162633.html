@@ -1,0 +1,24 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="regresar()">
+                <ion-icon slot="start" name="arrow-back"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Formas de pago</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item detail (click)="nuevaTarjeta()">
+            <ion-icon slot="start" name="add"></ion-icon>
+            <ion-label class="ion-text-wrap">Agregar tarjeta de crédito/débito</ion-label>
+        </ion-item>
+        <!-- Aquí irían la lista de tarjetas -->
+        <ion-item detail (click)="nuevaTarjeta()">
+            <ion-icon slot="start" name="cash" color="success"></ion-icon>
+            <ion-label class="ion-text-wrap">Efectivo</ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

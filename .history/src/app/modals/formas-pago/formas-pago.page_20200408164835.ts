@@ -1,0 +1,79 @@
+import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
+
+import { TarjetaPage } from 'src/app/modals/tarjeta/tarjeta.page';
+
+import { DisparadoresService } from 'src/app/services/disparadores.service';
+
+import { FormaPago } from 'src/app/interfaces/forma-pago.interface';
+
+import { enterAnimationDerecha } from 'src/app/animations/enterDerecha';
+import { leaveAnimationDerecha } from 'src/app/animations/leaveDerecha';
+import { PagosService } from 'src/app/services/pagos.service';
+
+@Component({
+  selector: 'app-formas-pago',
+  templateUrl: './formas-pago.page.html',
+  styleUrls: ['./formas-pago.page.scss'],
+})
+export class FormasPagoPage implements OnInit {
+
+  tarjetas: FormaPago[] = [ ]
+
+  err: string
+
+  constructor(
+    private modalCtrl: ModalController,
+    private alertService: DisparadoresService,
+    private pagoService: PagosService,
+  ) { }
+
+  ngOnInit() {
+    this.getTarjetas()
+    const script = document.createElement('script')
+    script.src = 'https://cdn.conekta.io/js/latest/conekta.js'
+    script.async = true
+    document.body.appendChild(script)
+  }
+
+  getTarjetas() {
+    this.pagoService.getTarjetas()
+    .then(tarjetas => this.tarjetas = tarjetas)
+    .catch(err => this.err = err)
+  }
+
+  async nuevaTarjeta() {
+    const modal = await this.modalCtrl.create({
+      component: TarjetaPage,
+      enterAnimation: enterAnimationDerecha,
+      leaveAnimation: leaveAnimationDerecha,
+    });
+
+    modal.onWillDismiss().then(resp => {
+      if (resp.data) this.tarjetas.push(resp.data)
+    });
+
+    return await modal.present();
+  }
+
+  async selFormaPago(forma, tipo, token) {
+    const pago: FormaPago = {
+      forma,
+      tipo,
+      token
+    }
+    try {
+      await this.pagoService.guardarFormaPago(pago);
+      this.modalCtrl.dismiss(pago)
+    } catch (error) {
+      this.alertService.presentAlert(
+        'Algo salió mal',
+        'Tuvimos problemas para asignar tu forma de pago, por favor intenta de nuevo')
+    }
+  }
+
+  regresar() {
+    this.modalCtrl.dismiss()
+  }
+
+}
